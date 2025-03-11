@@ -1,0 +1,69 @@
+:root {
+  --dark-black: #1a1a1a;
+  --dark-gray: #333;
+  --light-gray: #f2f4f7;
+  --light-black: #333;
+  --light-white: #fff;
+  --primary: #9264a8;
+  --secondary: #6c757d;
+  --shadow: #9264a87b;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&display=swap');
+
+#root {
+  text-align: left;
+  max-width: unset;
+  padding: unset;
+  margin: unset;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+body {
+  font-family: 'Baloo 2', sans-serif !important;
+  font-style: normal;
+  margin: 0;
+  min-height: 100%;
+  background-color: #fff;
+  font-size: 14px;
+  line-height: 20px;
+  color: #333;
+}
+
+
+
+a {
+  text-decoration: unset;
+  color: var(--dark-black);
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.main-section{
+  display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    height: 80vh;
+}
+
+.list-section{
+  margin-bottom: 10px;
+  width: 400px;
+  
+  .list-card{
+    padding: 0px 0px;
+  }
+
+  .todo-card{
+    padding: 0px;
+    margin: 0px;
+    list-style-type: none;
+    
+
+
+  }
+}
