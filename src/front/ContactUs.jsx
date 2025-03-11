@@ -1,9 +1,9 @@
 export default function ContactUs() {
     return (
         <>
-            <div className=" pb-5 contactus">
+            <div className="container pb-5 contactus">
                 <div className="row justify-content-center">
-                    <div className="col-lg-10">
+                    <div className="col-lg-12">
                         <div className="contact-wrapper">
                             <div className="row g-0">
                                 <div className="col-md-5">
