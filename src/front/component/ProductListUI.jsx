@@ -12,7 +12,7 @@ function ProductListUI({ item }) {
                 </div>
 
                 <h5 className="product-name ">{item.title}</h5>
-                <p className="product-text">{item.description}</p>
+                {/* <p className="product-text">{item.description}</p> */}
             </div>
         </div>
     )

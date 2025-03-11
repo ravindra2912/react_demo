@@ -12,6 +12,8 @@ import Razorpay from "../front/cart/Razorpay";
 import Login from "../front/auth/Login";
 import CheckAuth from "../front/Layout/CheckAuth";
 import ContactUs from "../front/ContactUs";
+import Faq from "../front/Faq";
+import AboutUs from "../front/AboutUs";
 
 
 
@@ -34,6 +36,8 @@ function MainRoutes() {
                     </Route>
 
                     {/* auth */}
+                    <Route path="about-us" element={<AboutUs />} />
+                    <Route path="faq" element={<Faq />} />
                     <Route path="contactus" element={<ContactUs />} />
                     <Route path="login" element={<Login />} />
                     <Route path="*" element={<PageWith404Handler />} />
