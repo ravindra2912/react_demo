@@ -99,6 +99,7 @@ a:hover {
   }
 
   .navbar {
+    /* background-color: var(--primary); */
     background-color: #f2f4f7;
   }
 
@@ -468,10 +469,12 @@ footer {
 .faq {
   .accordion-button:not(.collapsed) {
     background-color: var(--shadow);
+    border-radius: 5px !important;
   }
 
   .accordion-button:focus {
     box-shadow: var(--primary);
+    
   }
 }
 
