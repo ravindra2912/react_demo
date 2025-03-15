@@ -53,10 +53,20 @@ const Header = () => {
                                 !auth.token ? <li className="nav-item">
                                     <NavLink className="nav-link" activeclassname="active" to="/login">Login </NavLink>
                                 </li> : <li className="nav-item">
-                                    <div className="nav-link" onClick={() => logout()} >Logout </div>
+                                    <div className="dropdown text-end">
+                                        <a href="#" className="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" className="rounded-circle" />
+                                        </a>
+                                        <ul className="dropdown-menu text-small" >
+                                            <li><a className="dropdown-item" href="#">New project...</a></li>
+                                            <li><a className="dropdown-item" href="#">Settings</a></li>
+                                            <li><NavLink className="dropdown-item" to="/account/profile">Profile</NavLink></li>
+                                            <li><hr className="dropdown-divider" /></li>
+                                            <li><div className="dropdown-item" onClick={() => logout()}>Sign out</div></li>
+                                        </ul>
+                                    </div>
                                 </li>
                             }
-
 
 
                         </ul>

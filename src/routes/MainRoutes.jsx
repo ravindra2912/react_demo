@@ -14,6 +14,7 @@ import CheckAuth from "../front/Layout/CheckAuth";
 import ContactUs from "../front/ContactUs";
 import Faq from "../front/Faq";
 import AboutUs from "../front/AboutUs";
+import Profile from "../front/account/Profile";
 
 
 
@@ -33,6 +34,8 @@ function MainRoutes() {
                         <Route path="product/:slug" element={<ProductDetails />} />
                         <Route path="cart" element={<Cart />} />
                         <Route path="/razorpay/payment" element={<Razorpay />} />
+
+                        <Route path="/account/profile" element={<Profile />} />
                     </Route>
 
                     {/* auth */}

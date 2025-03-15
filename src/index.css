@@ -474,7 +474,7 @@ footer {
 
   .accordion-button:focus {
     box-shadow: var(--primary);
-    
+
   }
 }
 
@@ -501,6 +501,27 @@ footer {
   .about-us .btn-primary:hover {
     transform: translateY(-3px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.account {
+  .sidebar {
+    ul>li {
+      border-bottom: 1px solid #ebeae6;
+      margin-top: 0;
+      line-height: 30px;
+    }
+
+    ul li a {
+      background: #f8f7f5 !important;
+      color: #89817f !important;
+      border-left: 5px solid #f8f7f5;
+      text-align: left;
+    }
+    
+    ul li.active a, ul li a:hover {
+      border-left: 5px solid var(--primary);
+    }
   }
 }
 
