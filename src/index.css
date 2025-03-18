@@ -47,7 +47,9 @@ a:hover {
   color: var(--primary);
 }
 
-
+.bg-primary{
+  background-color: var(--primary) !important;
+}
 
 .btn-primary {
   background-color: var(--primary) !important;
@@ -519,11 +521,29 @@ footer {
       text-align: left;
     }
     
-    ul li.active a, ul li a:hover {
+    ul li a.active, ul li a:hover {
       border-left: 5px solid var(--primary);
+    }
+
+    ul li:first-child {
+      padding-top: 1px;
+    }
+  }
+
+  .order-list{
+    .order-header{
+      font-size: 16px;
+      font-weight: 700;
+      color: gray;
+    }
+    .order-box{
+      background: #ebf5fb;
+      
     }
   }
 }
+
+
 
 .login {
 

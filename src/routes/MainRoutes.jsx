@@ -15,6 +15,8 @@ import ContactUs from "../front/ContactUs";
 import Faq from "../front/Faq";
 import AboutUs from "../front/AboutUs";
 import Profile from "../front/account/Profile";
+import OrderList from "../front/account/orders/OrderList";
+import AccountLayout from "../front/account/AccountLayout";
 
 
 
@@ -35,7 +37,10 @@ function MainRoutes() {
                         <Route path="cart" element={<Cart />} />
                         <Route path="/razorpay/payment" element={<Razorpay />} />
 
-                        <Route path="/account/profile" element={<Profile />} />
+                        <Route element={<AccountLayout />} >
+                            <Route path="/account/profile" element={<Profile />} />
+                            <Route path="/account/orders" element={<OrderList />} />
+                        </Route>
                     </Route>
 
                     {/* auth */}
