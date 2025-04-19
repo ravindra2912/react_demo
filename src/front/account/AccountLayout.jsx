@@ -8,9 +8,7 @@ function AccountLayout() {
 
     useEffect(()=>{
         SetProfile(user.info);
-        console.log(profile)
-
-    },[])
+    },[user])
 
     return (
         <>
@@ -24,8 +22,9 @@ function AccountLayout() {
                                 <img
                                     src={profile?.image ? profile.image :''}
                                     alt={profile?.name}
-                                    className="rounded-circle img-fluid mb-3"
-                                    width="100"
+                                    className="rounded-circle object-fit-cover mb-3"
+                                    width="90"
+                                    height="90"
                                 />
                                 <h5 className="card-title">{profile?.name}</h5>
                                 <p className="text-muted">{profile?.email}</p>
@@ -37,11 +36,11 @@ function AccountLayout() {
                                         </NavLink>
                                     </li>
 
-                                    <li className="nav-item">
+                                    {/* <li className="nav-item">
                                         <a href="#" className="nav-link ">
                                             <i className="bi bi-geo-alt-fill me-3"></i>Address
                                         </a>
-                                    </li>
+                                    </li> */}
                                     
                                     <li className="nav-item">
                                         <NavLink activeclassname="active" to={'/account/orders'} className="nav-link ">

@@ -6,6 +6,7 @@ import { LogoutReq } from "../services/redux/slices/AuthSlice";
 
 const Header = () => {
     const cart = useSelector((state) => state.cart);
+    const userInfo = useSelector((state) => state.auth.info);
     const dispatch = useDispatch();
     const auth = useSelector((state) => state.auth);
     function logout() {
@@ -28,7 +29,7 @@ const Header = () => {
                         </div>
                     </div>
 
-                    <div className="collapse navbar-collapse justify-content-end me-4" id="navbarNav">
+                    <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
                         <ul className="navbar-nav">
                             <li className="nav-item">
                                 <NavLink className="nav-link" activeclassname="active" aria-current="page" to="/">Home</NavLink>
@@ -55,12 +56,11 @@ const Header = () => {
                                 </li> : <li className="nav-item">
                                     <div className="dropdown text-end">
                                         <a href="#" className="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" className="rounded-circle" />
+                                            <img src={userInfo?.image} alt={userInfo?.name} className="rounded-circle" />
                                         </a>
                                         <ul className="dropdown-menu text-small" >
-                                            <li><a className="dropdown-item" href="#">New project...</a></li>
-                                            <li><a className="dropdown-item" href="#">Settings</a></li>
                                             <li><NavLink className="dropdown-item" to="/account/profile">Profile</NavLink></li>
+                                            <li><NavLink className="dropdown-item" to="/account/orders">Orders</NavLink></li>
                                             <li><hr className="dropdown-divider" /></li>
                                             <li><div className="dropdown-item" onClick={() => logout()}>Sign out</div></li>
                                         </ul>

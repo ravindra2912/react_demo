@@ -1,9 +1,10 @@
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
-const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5YjZkNmE3OC01YzhjLTRhNzYtOTkzNS00YjAyNzcxMDZjYjciLCJqdGkiOiJhMTJhZmRhNDVmMDI3ZjI4NmZlYmUxMzY2ODI1OTc0M2FiNzRjYjQ1ODUyMDRjNzlhMDBiZWIyYTY5ODA2N2RhYzMyYjM2YmQxNjgzNTRhMiIsImlhdCI6MTcwOTYzNDcyNy4zODc2OTEsIm5iZiI6MTcwOTYzNDcyNy4zODc2OTQsImV4cCI6MTc0MTE3MDcyNy4xOTAyMzIsInN1YiI6IjEiLCJzY29wZXMiOltdfQ.mJCs6M4GnscO1XdnV-jz5mg3iZeFz_AhGGmCnvJ3l7xZpGDeNmDgMs05pabJKjaJ9FLHYHmCQGW2fT0094EHX3PuwW5M5JhP0oOPkCntXIgWSwfq8Dpy6eWCnICe6R4nZqwumD_4FdMUWihRQsYFxrsOkLXFE4oW-yJc_6VFLBI0L82l3Gmhxd7rbRyaFN7mRP2MbSLKyIPcYvK0WbgEmFxdJhepQr9M_QS1mQcCqO1rMwKd8g64Fxr79ML9cY14Zi96orPQE-LYGi0hMx1ax5dlBfpcreSLSDMC28b7B4FEiq_Xdq3XrwKNT7ti07KJvQpqkMmokxeDESuaW28EMbewPxEqtEh5HaMl7ZDwj0HwGSpg7ROPAh6JqtMgF6qAYRdPVblnVuU3UGziEQu9zo7HaisNwboxlBJQxgBnvdngvopQydiEhUZ5zqOYStzR0ouTxe2NKebI9DAMYMR6KjlR9qcM3YD_R9u6bhGca_Lr6kznfuBd8Nwp358sFsCjcr1Xw1LjCYdjQVXJsUnKXxQYgr3pJ-WqP_iv9Kzpq-BICd4_3sa_ZxHOn4z1UMMFa6zdWuS-74cBj-6g_UqbZuR3R1rUAYoQ3rTiiCs4T7HFtjUPCIDPP21bfHDHwxtg9s4JFe6VHI8TGP4Kc1bKrhxOM6nUmEztoo-OHe-Yq3w';
-const BASE_URL = 'https://dummyjson.com/';
-async function AxiosReq(endpoint, data = null, method = "GET", navigation = () => { }) {
-
+// const BASE_URL = 'https://dummyjson.com/';
+// const BASE_URL = 'http://bajarang_enterprice.test/api/';
+const BASE_URL = import.meta.env.VITE_API_URL;
+async function AxiosReq(endpoint, data = null, method = "GET", navigation = () => { }, token = "") {
     // const requestData = data && typeof data === "object" ? JSON.stringify(data) : "{}";
 
     try {
@@ -15,13 +16,15 @@ async function AxiosReq(endpoint, data = null, method = "GET", navigation = () =
             data: data,
             headers: {
                 //  'Content-Type': 'application/json',
+                // "Content-Type": "multipart/form-data",
                 "Content-Type": "application/json, multipart/form-data",
                 Authorization: `Bearer ${token}`
             }
         })
         //  console.log(response)
         if (response.status === 200 || response.status === 201) {
-            return { success: true, message: 'success', data: response.data, status:response.status };
+            // console.log("API Response:", response);
+            return { success: response.data.success, message: response.data.message, data: response.data.data, status:response.status };
         } else {
             console.error(`Unexpected response: ${response.status}`, response);
             // throw new Error(`Server Error: ${response.status}`);

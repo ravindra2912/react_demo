@@ -17,6 +17,8 @@ import AboutUs from "../front/AboutUs";
 import Profile from "../front/account/Profile";
 import OrderList from "../front/account/orders/OrderList";
 import AccountLayout from "../front/account/AccountLayout";
+import Checkout from "../front/cart/Checkout";
+import OrderDetails from "../front/account/orders/OrderDetails";
 
 
 
@@ -30,18 +32,22 @@ function MainRoutes() {
             <Routes>
                 <Route element={<Main />} >
                     <Route element={<CheckAuth />} >
-                        <Route path="" element={<Home />} />
-                        <Route path="products" element={<Products />} />
-                        {/* <Route path="product/:slug" element={<ProductImageZoom />} /> */}
-                        <Route path="product/:slug" element={<ProductDetails />} />
+
                         <Route path="cart" element={<Cart />} />
+                        <Route path="checkout" element={<Checkout />} />
                         <Route path="/razorpay/payment" element={<Razorpay />} />
 
                         <Route element={<AccountLayout />} >
                             <Route path="/account/profile" element={<Profile />} />
                             <Route path="/account/orders" element={<OrderList />} />
+                            <Route path="/account/order/:id" element={<OrderDetails />} />
                         </Route>
                     </Route>
+
+                    <Route path="" element={<Home />} />
+                    <Route path="products" element={<Products />} />
+                    {/* <Route path="product/:slug" element={<ProductImageZoom />} /> */}
+                    <Route path="product/:slug" element={<ProductDetails />} />
 
                     {/* auth */}
                     <Route path="about-us" element={<AboutUs />} />

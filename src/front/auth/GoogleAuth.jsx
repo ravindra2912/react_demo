@@ -2,7 +2,7 @@ import React from "react";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import toast from "react-hot-toast";
 
-const clientId = "905622334707-u9jtfm44li34c090k0jfmgf6dfkk39lt.apps.googleusercontent.com"; // Replace with your actual client ID
+const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID; // Replace with your actual client ID
 
 const GoogleAuth = ({loginUser}) => {
   // const handleSuccess = (credentialResponse) => {

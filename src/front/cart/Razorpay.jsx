@@ -1,7 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import toast from "react-hot-toast";
+import { useLocation } from "react-router-dom";
+import logo from '../../assets/logo.png';
 
 function Razorpay() {
+    const location = useLocation();
+
+    let[orderid , setOrderid] = React.useState('')
+    let[amount, setAmont] = React.useState('')
+    let[orderNotFound, setOrderNotFound] = React.useState(false)
+
+    useEffect(()=>{
+        const { order_id, amount } = location.state || {};
+        if(order_id && amount){
+            setOrderid(order_id)
+            setAmont(amount)
+        }else{
+            setOrderNotFound(true)
+        }
+        console.log(order_id, amount)
+    },[])
+
 
     const LoadScript = (src) => {
         return new Promise((resolve) => {
@@ -26,22 +45,24 @@ function Razorpay() {
         }
 
         var data = {
-            amount: 50000,
+            amount: 5000,
             currency: 'INR',
-            receipt: 'order_rcptid_11',
-            payment_capture: '1'
+            receipt: 'order_rcptid_'+orderid,
+            payment_capture: '1',
+            id: orderid
         }
 
         console.log(data)
 
         const options = {
-            key: 'rzp_test_1DP5mmOlF5G5ag',
+            // key: 'rzp_test_1DP5mmOlF5G5ag',
+            key: import.meta.env.VITE_RAZORPAY_KEY,
             currency: data.currency,
             amount: data.amount.toString(),
             order_id: data.id,
             name: 'Donation',
             description: 'Thank you for nothing. Please give us some money',
-            image: 'http://localhost:1337/logo.svg',
+            image: logo,
             handler: function (response) {
                 console.log(response)
                 toast.success('Payment Success. '+ response.razorpay_payment_id);

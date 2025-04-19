@@ -47,7 +47,11 @@ a:hover {
   color: var(--primary);
 }
 
-.bg-primary{
+.border-primary{
+  border-color: var(--primary) !important;
+}
+
+.bg-primary {
   background-color: var(--primary) !important;
 }
 
@@ -98,6 +102,16 @@ a:hover {
 
   img {
     height: 35px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .dropdown-toggle::after{
+    display: none !important;
+  }
+
+  .navbar-brand {
+    padding: 0px;
   }
 
   .navbar {
@@ -210,7 +224,7 @@ a:hover {
 }
 
 .home {
-  margin-top: -96px;
+  margin-top: -20px;
 
   .sc-gjcoXW {
     height: 300px !important;
@@ -234,7 +248,7 @@ a:hover {
     }
 
     img {
-      height: 140px;
+      height: 100px;
       width: 100%;
       object-fit: contain
     }
@@ -274,8 +288,9 @@ footer {
 
 .product {
   .card {
-    background-color: #f2f4f7;
-    border: 1px solid #f2f4f7;
+    /* background-color: #f2f4f7; */
+    /* border: 1px solid #f2f4f7; */
+    border: unset;
     border-radius: 12px;
   }
 
@@ -339,8 +354,8 @@ footer {
 
   .productimg {
     height: 350px;
-    width: auto;
-    object-fit: cover;
+    width: 100%;
+    object-fit: contain;
     border-radius: 8px;
   }
 
@@ -361,6 +376,40 @@ footer {
     img:hover {
       box-shadow: 0px 0px 3px 0px gray;
     }
+  }
+
+  .btn-outline-primary, .btn-outline-primary:hover{
+    border-color: var(--primary);
+    background: var(--primary) !important;
+    i{
+      color: white;
+    }
+  }
+
+
+  .btn-dash {
+    border-right: unset;
+    border-top-right-radius: unset;
+    border-bottom-right-radius: unset;
+  }
+
+  .btn-plus {
+    border-left: unset;
+    border-top-left-radius: unset;
+    border-bottom-left-radius: unset;
+  }
+
+  .cart-input{
+    width: 60px;
+    border-radius: unset;
+    border-left: unset;
+    border-right: unset;
+    margin: 0px -8px;
+    border-color: var(--primary);
+  }
+
+  .cart-input:focus{
+    box-shadow: unset !important;
   }
 }
 
@@ -520,8 +569,9 @@ footer {
       border-left: 5px solid #f8f7f5;
       text-align: left;
     }
-    
-    ul li a.active, ul li a:hover {
+
+    ul li a.active,
+    ul li a:hover {
       border-left: 5px solid var(--primary);
     }
 
@@ -530,15 +580,16 @@ footer {
     }
   }
 
-  .order-list{
-    .order-header{
+  .order-list {
+    .order-header {
       font-size: 16px;
       font-weight: 700;
       color: gray;
     }
-    .order-box{
+
+    .order-box {
       background: #ebf5fb;
-      
+
     }
   }
 }

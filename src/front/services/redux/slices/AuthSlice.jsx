@@ -24,19 +24,13 @@ const AuthSlice = createSlice({
                 });
             }
         },
-        Update(state, action) {
-            console.log("Update User's info");
-            const user = state.find((item) => item.email === action.payload.email);
-            if (user) {
-                Object.assign(user, {
-                    email: action.payload.email,
-                    password: action.payload.password,
-                    name: action.payload.name
-                });
-            }
-        },
+        UpdateProfile(state, action){
+            state.info.name = action.payload.name;
+            state.info.email = action.payload.email;
+            state.info.image = action.payload.image;
+        }
     }
 });
 
-export const { loginReq, LogoutReq } = AuthSlice.actions;
+export const { loginReq, LogoutReq, UpdateProfile } = AuthSlice.actions;
 export default AuthSlice.reducer;
