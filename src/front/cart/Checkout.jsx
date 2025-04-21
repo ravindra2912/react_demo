@@ -25,13 +25,13 @@ function Checkout() {
     async function getCartData() {
         window.scrollTo(0, 0);
         setLoading(true);
-        await AxiosReq(`cart_list`, '', 'POST', navigate, token)
+        await AxiosReq(`cart_list`, '', 'get', navigate, token)
             .then((response) => {
                 console.log(response);
                 if (response.success) {
                     setCartData(response.data);
                 } else {
-                    toast.error(response.message)
+                    // toast.error(response.message)
                 }
             })
             .catch((error) => {
@@ -58,20 +58,18 @@ function Checkout() {
     }
 
     async function placeOrder() {
-        let postdata = {
-            "name": document.getElementById('name').value,
-            "contact": document.getElementById('contact').value,
-            // "email": document.getElementById('email').value,
-            "address": document.getElementById('address').value,
-            "country": document.getElementById('state').value,
-            "state": document.getElementById('state').value,
-            "city": document.getElementById('city').value,
-            "zipcode": document.getElementById('pincode').value,
-            "payment_type": 1
-        }
-
+        const formData = new FormData();
+        formData.append('name', document.getElementById('name').value);
+        formData.append('contact', document.getElementById('contact').value);
+        formData.append('address', document.getElementById('address').value);
+        formData.append('country', document.getElementById('country').value);
+        formData.append('state', document.getElementById('state').value);
+        formData.append('city', document.getElementById('city').value);
+        formData.append('zipcode', document.getElementById('pincode').value);
+        formData.append('payment_type', 1);
+        
         setplaceOrderLoading(true)
-        await AxiosReq(`place_order`, postdata, 'POST', navigate, token)
+        await AxiosReq(`place_order`, formData, 'POST', navigate, token)
             .then((response) => {
                 console.log(response);
                 if (response.success) {

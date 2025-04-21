@@ -19,6 +19,7 @@ import OrderList from "../front/account/orders/OrderList";
 import AccountLayout from "../front/account/AccountLayout";
 import Checkout from "../front/cart/Checkout";
 import OrderDetails from "../front/account/orders/OrderDetails";
+import WishList from "../front/account/WishList";
 
 
 
@@ -41,6 +42,7 @@ function MainRoutes() {
                             <Route path="/account/profile" element={<Profile />} />
                             <Route path="/account/orders" element={<OrderList />} />
                             <Route path="/account/order/:id" element={<OrderDetails />} />
+                            <Route path="/account/wishlist" element={<WishList />} />
                         </Route>
                     </Route>
 

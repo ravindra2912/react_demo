@@ -49,9 +49,9 @@ function AccountLayout() {
                                     </li>
                                     
                                     <li className="nav-item rounded-bottom">
-                                        <a href="#" className="nav-link rounded-bottom">
+                                        <NavLink to={'/account/wishlist'} activeclassname="active" className="nav-link rounded-bottom">
                                             <i className="bi bi-heart-fill me-3"></i>Wishlist
-                                        </a>
+                                        </NavLink>
                                     </li>
 
                                 </ul>

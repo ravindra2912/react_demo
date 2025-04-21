@@ -23,6 +23,8 @@ function ProductDetails(props) {
     // cart variable
     const [quantity, setQuantity] = useState(1);
     const [cartLoading, setCartLoading] = useState(false);
+    // product fevourite
+    let [fevouriteLoading, setfevouriteLoading] = useState(false);
 
     var { slug } = useParams();
 
@@ -33,6 +35,14 @@ function ProductDetails(props) {
 
         getProductDetailds()
     }, [relatedProductId])
+
+    function checkAuth() {
+        if (token == null || token == undefined || token == '') {
+            toast.error('Please login to add product in your cart')
+            navigate('/login')
+            return false;
+        }
+    }
 
     async function getProductDetailds() {
         setLoading(true);
@@ -85,11 +95,7 @@ function ProductDetails(props) {
         // dispatch(addToCart(data));
         // toast.success('Product Added Successfully in your cart.');
 
-        if (token == null || token == undefined || token == '') {
-            toast.error('Please login to add product in your cart')
-            navigate('/login')
-            return false;
-        }
+        checkAuth();
 
         setCartLoading(true)
         const data = {
@@ -125,13 +131,45 @@ function ProductDetails(props) {
     };
 
 
+    // ************************** favouriteProduct ********************
+    async function favouriteProduct(id = null) {
+        var product_id = id == null ? product.id : id;
+        checkAuth();
+        await AxiosReq(`add_to_wishlist`, { product_id: product_id }, 'POST', navigate, token)
+            .then((response) => {
+                if (response.success) {
+                    if (id == null) {
+                        setProduct(prevProduct => ({ ...prevProduct, is_fevourit: response.data.is_fevourit }));
+                    } else {
+                        const updatedRelatedProducts = product.related_products.map((item) => {
+                            if (item.id === product_id) {
+                                return { ...item, is_fevourit: response.data.is_fevourit };
+                            }
+                            return item;
+                        });
+                        setProduct(prevProduct => ({ ...prevProduct, related_products: updatedRelatedProducts }));
+                    }
+                    toast.success(response.message)
+                } else {
+                    toast.error(response.message)
+                }
+            })
+            .catch((error) => {
+                toast.error('Somthing wron while add to cart')
+                console.log(error);
+
+            }).finally(() => {
+            });
+    }
+
+
     return (
         < >
             {
                 is404 ? <PageWith404Handler /> :
                     <section className="container product-details">
                         <div className="row">
-                            <div className="col-xl-5 col-md-5 col-12 text-center">
+                            <div className="col-xl-6 col-md-6 col-12 text-center">
                                 <div>
                                     {
                                         loading ? <Skeleton height={300} /> :
@@ -157,45 +195,44 @@ function ProductDetails(props) {
                                 </div>
 
                             </div>
-                            <div className="col-xl-7 col-md-7 col-12">
+                            <div className="col-xl-5 col-md-5 col-12">
                                 {loading ? <Skeleton height={25} width={200} /> : <h5>{product.brand}</h5>}
                                 {loading ? <Skeleton height={30} width={300} className="mt-2" /> : <p className="h2 mt-3 fw-semibold"><span>&#8377;{product.price}</span><span className="ms-2 text-muted text-decoration-line-through">&#8377;{product.price}</span></p>}
                                 {loading ? <Skeleton height={30} width={300} className="mt-2" /> : <h1>{product.name}</h1>}
                                 {loading ? <Skeleton height={100} className="mt-3" /> : <p className="mt-3">{product.short_description}</p>}
 
-                                <div className="d-flex align-items-center gap-2 mt-4">
-                                    {loading ? <Skeleton height={80} width={400} /> : <>
-                                        {/* Minus Button */}
-                                        < button className="btn btn-outline-primary btn-dash" onClick={() => setQuantity(prevQty => (prevQty > 1 ? prevQty - 1 : 1))}>
-                                            <i className="bi bi-dash"></i> {/* Bootstrap icon */}
-                                        </button>
 
-                                        {/* Quantity Input */}
+                                {loading ? <Skeleton height={80} width={400} /> : <>
+                                    <div className="d-flex align-items-center gap-2 mt-4 mb-3">
+
+                                        < button className="btn btn-outline-primary btn-dash" onClick={() => setQuantity(prevQty => (prevQty > 1 ? prevQty - 1 : 1))}>
+                                            <i className="bi bi-dash"></i>
+                                        </button>
                                         <input
                                             type="text"
                                             className="form-control text-center cart-input"
                                             value={quantity}
                                             onChange={handleInputChange}
-                                            
-                                        />
 
-                                        {/* Plus Button */}
+                                        />
                                         <button className="btn btn-outline-primary btn-plus" onClick={() => setQuantity(prevQty => prevQty + 1)}>
-                                            <i className="bi bi-plus"></i> {/* Bootstrap icon */}
+                                            <i className="bi bi-plus"></i>
                                         </button>
 
                                         {/* Add to Cart Button */}
-                                        <button className="btn btn-primary" disabled={cartLoading} onClick={(e) => addToUserCart(product.id, 2)}>
+                                        <button className="btn btn-dark w-50" disabled={cartLoading} onClick={(e) => addToUserCart(product.id, 2)}>
                                             {cartLoading ? 'Adding ...' : 'Add to Cart'}
                                         </button>
 
                                         {/* Go to cart Button */}
-                                        <button className="btn btn-danger" disabled={cartLoading} onClick={(e) => navigate('/cart')}>
-                                            {cartLoading ? 'Adding ...' : 'Go to Cart'}
+                                        <button className="btn btn-gray" disabled={cartLoading} onClick={(e) => { favouriteProduct() }}>
+                                            {product.is_fevourit ? <i className="bi bi-heart-fill"></i> : <i className="bi bi-heart"></i>}
+
                                         </button>
-                                    </>
-                                    }
-                                </div>
+                                    </div>
+                                </>
+                                }
+
 
                             </div>
                         </div>
@@ -221,9 +258,9 @@ function ProductDetails(props) {
                                         product.related_products.length > 0 ?
                                             product.related_products.map((item, i) => {
                                                 return (
-                                                    <Link to={'/product/' + item.slug} onClick={() => setRelatedProductId(item.slug)} className="col-xl-3 col-md-3 col-sm-4 col-12 mb-3" key={'relate' + i}>
-                                                        <ProductListUI item={item} />
-                                                    </Link>
+                                                    <div className="col-xl-3 col-md-3 col-sm-4 col-12 mb-3" key={'relate' + i}>
+                                                        <ProductListUI item={item} token={token} favouriteProduct={(e) => favouriteProduct(e)} setRelatedProductId={(e) => setRelatedProductId(e)} />
+                                                    </div>
                                                 )
                                             })
                                             : <p className="text-center">Not Product</p>

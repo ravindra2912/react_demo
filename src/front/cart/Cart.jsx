@@ -23,7 +23,7 @@ function Cart() {
     async function getCartData() {
         window.scrollTo(0, 0);
         setLoading(true);
-        await AxiosReq(`cart_list`, '', 'POST', navigate, token)
+        await AxiosReq(`cart_list`, '', 'get', navigate, token)
             .then((response) => {
                 console.log(response);
                 if (response.success) {

@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import AxiosReq from "../AxiosReq";
 import { Link, useNavigate } from "react-router-dom";
 import ProductListUI from "../component/ProductListUI";
 import Skeleton from "react-loading-skeleton";
 import { useSelector } from "react-redux";
+import toast from "react-hot-toast";
 
 function debounce(callback, wait) {
     let timeout
@@ -27,10 +28,38 @@ const Products = () => {
     let [skip, setSkip] = useState(0);
     const debouncedSetSearch = debounce((...args) => setSearch(...args), 200);
 
+    const divRef = useRef(null);
 
     useEffect(() => {
-        getProducts();
+        handlerScroll();
+    }, [divRef.current, Loading]);
+
+    useEffect(() => {
+        // getProducts();
     }, [search, sortby]);
+
+    function handlerScroll() {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        getProducts();
+                    }
+                });
+            },
+            { root: null, rootMargin: '0px', threshold: 1 }
+        );
+
+        if (divRef.current) {
+            observer.observe(divRef.current);
+        }
+
+        return () => {
+            if (divRef.current) {
+                observer.unobserve(divRef.current);
+            }
+        };
+    }
 
 
 
@@ -56,7 +85,7 @@ const Products = () => {
         var data = {
             offset: skip,
             limite: limit,
-            sortby:sortby,
+            sortby: sortby,
             search: search
         }
         await AxiosReq(`producs`, data, 'POST', navigate, token)
@@ -68,6 +97,8 @@ const Products = () => {
                         setNomoreproduct(true);
                     }
                     setSkip((pre) => pre + limit)
+                } else {
+                    setNomoreproduct(true);
                 }
             })
             .catch((error) => {
@@ -82,12 +113,36 @@ const Products = () => {
         var indents = [];
         for (var i = 1; i <= 4; i++) {
             indents.push(
-                <div className="col-xl-3 col-md-3 col-sm-4 col-12 mb-3" style={{ border: 'unset' }} key={'homeproduct-' + i}>
+                <div className="col-xl-3 col-md-4 col-sm-4 col-6 mb-3 loading" style={{ border: 'unset' }} key={'homeproduct-' + i}>
                     <Skeleton height={400} />
                 </div>
             )
         }
         return indents;
+    }
+
+    // ************************** favouriteProduct ********************
+    async function favouriteProduct(id) {
+        await AxiosReq(`add_to_wishlist`, { product_id: id }, 'POST', navigate, token)
+            .then((response) => {
+                if (response.success) {
+                    products.map((item) => {
+                        if (item.id == id) {
+                            item.is_fevourit = response.data.is_fevourit;
+                        }
+                    })
+                    setProducts([...products]);
+                    toast.success(response.message)
+                } else {
+                    toast.error(response.message)
+                }
+            })
+            .catch((error) => {
+                toast.error('Somthing wron while add to cart')
+                console.log(error);
+
+            }).finally(() => {
+            });
     }
 
     return (
@@ -141,9 +196,9 @@ const Products = () => {
                                 products.length > 0 ?
                                     products.map((item, i) => {
                                         return (
-                                            <Link to={'/product/' + item.slug} className="col-xl-3 col-md-3 col-sm-4 col-12 mb-3" key={i}>
-                                                <ProductListUI item={item} />
-                                            </Link>
+                                            <div className="col-xl-3 col-md-4 col-sm-4 col-6 mb-3" key={i}>
+                                                <ProductListUI item={item} token={token} favouriteProduct={(e) => favouriteProduct(e)} />
+                                            </div>
                                         )
                                     })
                                     : !Loading ? <p className="text-center">Product Not found !</p> : null
@@ -152,11 +207,12 @@ const Products = () => {
                                 Loading ? showProductLoader() :
                                     (
                                         nomoreproduct ? null :
-                                            <div className="col-12">
-                                                <div className="d-flex justify-content-center">
-                                                    <button type="button" onClick={() => getProducts()} className="btn btn-primary btn-sm mt-3">Load More</button>
-                                                </div>
-                                            </div>
+                                            // <div className="col-12">
+                                            //     <div className="d-flex justify-content-center">
+                                            //         <button type="button" onClick={() => getProducts()} className="btn btn-primary btn-sm mt-3">Load More</button>
+                                            //     </div>
+                                            // </div>
+                                            <div ref={divRef} id="loadmore" />
                                     )
                             }
 

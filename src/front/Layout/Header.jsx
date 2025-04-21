@@ -53,14 +53,15 @@ const Header = () => {
                             {
                                 !auth.token ? <li className="nav-item">
                                     <NavLink className="nav-link" activeclassname="active" to="/login">Login </NavLink>
-                                </li> : <li className="nav-item">
+                                </li> : <li className="nav-item d-sm-block d-none align-self-center">
                                     <div className="dropdown text-end">
                                         <a href="#" className="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <img src={userInfo?.image} alt={userInfo?.name} className="rounded-circle" />
+                                            <img src={userInfo?.image} alt={userInfo?.name} className="rounded-circle profile-img" />
                                         </a>
                                         <ul className="dropdown-menu text-small" >
                                             <li><NavLink className="dropdown-item" to="/account/profile">Profile</NavLink></li>
                                             <li><NavLink className="dropdown-item" to="/account/orders">Orders</NavLink></li>
+                                            <li><NavLink className="dropdown-item" to="/account/wishlist">Wishlist</NavLink></li>
                                             <li><hr className="dropdown-divider" /></li>
                                             <li><div className="dropdown-item" onClick={() => logout()}>Sign out</div></li>
                                         </ul>

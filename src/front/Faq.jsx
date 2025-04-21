@@ -44,7 +44,7 @@ function Faq() {
         <>
 
             <div className="container my-2">
-                <h2 class="text-center mb-5">Frequently Asked Questions</h2>
+                <h2 className="text-center mb-5">Frequently Asked Questions</h2>
                 <div className=" accordion accordion-flush mx-auto faq" id="faqAccordion" >
 
                     {

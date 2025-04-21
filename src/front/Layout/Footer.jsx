@@ -12,7 +12,7 @@ function Footer() {
                     <img src={logo} height="60" />
                     <div className=" mt-3">
                         <p className="mb-0"><strong>Corporate Office</strong></p>
-                        <p>4th, Floor, Near Prahlad nagar garden, ahmedabad, gujrat, india 302520</p>
+                        <p>{ import.meta.env.VITE_ADDRESS }</p>
                     </div>
                 </div>
 
@@ -26,8 +26,8 @@ function Footer() {
                     </div>
 
                     <div className="col-md-4 col-sm-12 col-12 contact mt-3">
-                        <div className="pb-2"><span><i className="bi bi-envelope"></i></span> Test@gmail.com</div>
-                        <div><span><i className="bi bi-telephone"></i></span> +5588669955</div>
+                        <Link to={'mailto:'+import.meta.env.VITE_EMAIL} className="pb-2"><span><i className="bi bi-envelope"></i></span> {import.meta.env.VITE_EMAIL}</Link><br/>
+                        <Link ><span><i className="bi bi-telephone"></i></span> { import.meta.env.VITE_CONTACT }</Link>
                     </div>
                     <div className="col-md-4 col-sm-12 col-12 quick-link mt-3">
                         <h4>Usefull links</h4>

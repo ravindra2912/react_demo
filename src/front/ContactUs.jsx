@@ -17,7 +17,7 @@ export default function ContactUs() {
                                             </div>
                                             <div>
                                                 <h6 className="mb-0">Address</h6>
-                                                <p className="mb-0">123 Business Avenue, Suite 100<br />New York, NY 10001</p>
+                                                <p className="mb-0">{ import.meta.env.VITE_ADDRESS }</p>
                                             </div>
                                         </div>
 
@@ -27,7 +27,7 @@ export default function ContactUs() {
                                             </div>
                                             <div>
                                                 <h6 className="mb-0">Phone</h6>
-                                                <p className="mb-0">+1 (555) 123-4567</p>
+                                                <p className="mb-0">{ import.meta.env.VITE_CONTACT }</p>
                                             </div>
                                         </div>
 
@@ -37,7 +37,7 @@ export default function ContactUs() {
                                             </div>
                                             <div>
                                                 <h6 className="mb-0">Email</h6>
-                                                <p className="mb-0">contact@company.com</p>
+                                                <p className="mb-0">{import.meta.env.VITE_EMAIL}</p>
                                             </div>
                                         </div>
 
@@ -85,7 +85,7 @@ export default function ContactUs() {
                                         </form>
 
                                         <div className="map-container mt-4">
-                                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6260.682237481811!2d71.75175753386962!3d21.08767732228057!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be23bc553899057%3A0xb8958443d12b168e!2sJ%20J%20MART%201!5e0!3m2!1sen!2sin!4v1741699182915!5m2!1sen!2sin" width="100%" height="400" allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
+                                        <iframe src={import.meta.env.VITE_MAP_URL} width="100%" height="400" allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
                                         </div>
                                     </div>
                                 </div>
