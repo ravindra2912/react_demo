@@ -44,7 +44,7 @@ function OrderDetails() {
                     order ? (
                         <div className="row p-2">
                             <div className="col-md-6 col-12 mt-2 ">
-                                <div className="card border-0">
+                                <div className="card border-0 p-1">
                                     <div className="card-header">
                                         <h4 className="card-title">Order info</h4>
                                     </div>
@@ -67,7 +67,7 @@ function OrderDetails() {
                             </div>
 
                             <div className="col-md-6 col-12 mt-2 ">
-                                <div className="card border-0">
+                                <div className="card border-0  p-1">
                                     <div className="card-header">
                                         <h4 className="card-title">Shiping address</h4>
                                     </div>
@@ -109,7 +109,7 @@ function OrderDetails() {
                             </div>
 
                             <div className="col-md-8 col-12 mt-2 ">
-                                <div className="card border-0">
+                                <div className="card border-0 p-1">
                                     <div className="card-header">
                                         <h4 className="card-title">item</h4>
                                     </div>
@@ -144,7 +144,7 @@ function OrderDetails() {
                             </div>
 
                             <div className="col-md-4 col-12 mt-2 ">
-                                <div className="card border-0">
+                                <div className="card border-0 p-1">
                                     <div className="card-header">
                                         <h4 className="card-title">Summary</h4>
                                     </div>

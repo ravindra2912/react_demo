@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import AxiosReq from "../AxiosReq";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import ProductListUI from "../component/ProductListUI";
 import Skeleton from "react-loading-skeleton";
 import { useSelector } from "react-redux";
@@ -19,6 +19,7 @@ function debounce(callback, wait) {
 const Products = () => {
     const token = useSelector((state) => state.auth.token);
     const navigate = useNavigate(); // Initialize navigation
+    const [searchParams] = useSearchParams();
     let [Loading, setLoading] = useState(false);
     let [products, setProducts] = useState([]);
     let [search, setSearch] = useState('');
@@ -86,7 +87,8 @@ const Products = () => {
             offset: skip,
             limite: limit,
             sortby: sortby,
-            search: search
+            search: search,
+            category: searchParams.get('category') && searchParams.get('category'),
         }
         await AxiosReq(`producs`, data, 'POST', navigate, token)
             .then((response) => {
@@ -114,7 +116,7 @@ const Products = () => {
         for (var i = 1; i <= 4; i++) {
             indents.push(
                 <div className="col-xl-3 col-md-4 col-sm-4 col-6 mb-3 loading" style={{ border: 'unset' }} key={'homeproduct-' + i}>
-                    <Skeleton height={400} />
+                    <Skeleton className="productloading" />
                 </div>
             )
         }

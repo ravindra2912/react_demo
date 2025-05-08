@@ -51,8 +51,8 @@ function WishList() {
         var indents = [];
         for (var i = 1; i <= 4; i++) {
             indents.push(
-                <div className="col-xl-3 col-md-3 col-sm-4 col-12 mb-3" style={{ border: 'unset' }} key={'homeproduct-' + i}>
-                    <Skeleton height={400} />
+                <div className="col-xl-3 col-md-3 col-sm-4 col-6 mb-3" style={{ border: 'unset' }} key={'homeproduct-' + i}>
+                    <Skeleton className="productloading" />
                 </div>
             )
         }
@@ -81,7 +81,7 @@ function WishList() {
     return (
         <>
             <div className="card-header bg-primary text-white">
-                <h5 className="card-title">Profile</h5>
+                <h5 className="card-title">Whishlist</h5>
             </div>
             <div className="card-body">
                 <div className="row product">
@@ -89,7 +89,7 @@ function WishList() {
                         products.length > 0 ?
                             products.map((item, i) => {
                                 return (
-                                    <div className="col-xl-4 col-md-4 col-sm-6 col-12 mb-3" key={i}>
+                                    <div className="col-xl-4 col-md-4 col-sm-6 col-6 mb-3" key={i}>
                                         <ProductListUI item={item} token={token} favouriteProduct={(e) => removeToFavourite(e)} />
                                     </div>
                                 )

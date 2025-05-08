@@ -15,7 +15,7 @@ function AccountLayout() {
             <div className="container account my-4">
                 <div className="row">
                     {/* Sidebar */}
-                    <div className="col-md-3 sidebar">
+                    <div className="col-md-3 sidebar d-md-block d-none">
                         <div className="card p-0">
                             <div className="card-body rounded text-center p-0">
                                 <div className="bg-primary rounded-top  py-3">

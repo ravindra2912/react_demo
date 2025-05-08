@@ -15,7 +15,7 @@ function Home() {
     let [homeDatas, setHomeDatas] = useState([]);
 
     useEffect(() => {
-        getCategory();
+        getData();
         // getProducts();
     }, [])
 
@@ -27,7 +27,7 @@ function Home() {
     }
 
     //********************** Product start **********************
-    async function getCategory() {
+    async function getData() {
         setLoading(true);
 
         await AxiosReq(`get-home`, '', 'get', navigate, token)
@@ -50,8 +50,8 @@ function Home() {
         var indents = [];
         for (var i = 1; i <= 12; i++) {
             indents.push(
-                <div className='card col-sm-2 col-12 mt-3' style={{ border: 'unset' }} key={'mywork-' + i}>
-                    <Skeleton height={210} />
+                <div className='card col-md-3 col-sm-4 col-6 mt-3' style={{ border: 'unset' }} key={'mywork-' + i}>
+                    <Skeleton className="categoryloading" />
                 </div>
             )
         }
@@ -80,7 +80,7 @@ function Home() {
             <div className="home ">
                 {homeDatas?.homeBanner?.length > 0 ?
 
-                    <div id="carouselExampleIndicators" className="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+                    <div id="carouselExampleIndicators" className="carousel slide carousel-fade banner" data-bs-ride="carousel" data-bs-interval="5000">
                         <div className="carousel-indicators">
                             {
                                 homeDatas.homeBanner.map((item, index) => {
@@ -97,7 +97,7 @@ function Home() {
                             {
                                 homeDatas.homeBanner.map((item, index) => {
                                     return (
-                                        <div className={`carousel-item banner ${index === 0 ? 'active' : ''}`} key={'banner-' + index}>
+                                        <div className={`carousel-item  ${index === 0 ? 'active' : ''}`} key={'banner-' + index}>
                                             <img src={item.image} className="d-block w-100" alt="banner" />
                                         </div>
                                     )
@@ -129,7 +129,7 @@ function Home() {
 
                     </div>
                     :
-                    loading && <Skeleton height={400} />
+                    loading && <Skeleton className="bannerloading" />
 
                 }
                 {/* <div className="banner">
@@ -146,14 +146,14 @@ function Home() {
                                 homeDatas?.category?.length > 0 ?
                                     homeDatas.category.map((item, index) => {
                                         return (
-                                            <div key={index} className="col-sm-2 col-6 mt-3" >
+                                            <Link to={'/products?category='+item.slug} key={index} className="col-md-3 col-sm-4 col-6 mt-md-3 mt-0" >
                                                 <div className="card border-0"
                                                 // style={{ background: color, borderColor:color }}
                                                 >
                                                     <img src={item.imageurl} alt="category" />
-                                                    <p className="mt-3">{item.name}</p>
+                                                    <p className="mt-1 mb-1">{item.name}</p>
                                                 </div>
-                                            </div>
+                                            </Link>
                                         );
                                     })
                                     : ''

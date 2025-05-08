@@ -241,6 +241,10 @@ a:hover {
     width: 300px !important;
   }
 
+  .bannerloading {
+    height: 400px;
+  }
+
   .banner {
     img {
       width: 100%;
@@ -252,15 +256,37 @@ a:hover {
   .category {
     text-align: center;
 
-    .card {
+    .categoryloading{
+      height: 210px;
+    }
 
+    .card {
       padding: 5px;
     }
 
     img {
-      height: 100px;
+      height: 340px;
       width: 100%;
-      object-fit: contain
+      object-fit: cover;
+      border-radius: 10%;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .bannerloading {
+      height: 100px;
+    }
+
+    .category {
+      img {
+        height: 170px;
+      }
+    }
+
+    .banner {
+      img {
+        height: 100px;
+      }
     }
   }
 }
@@ -294,11 +320,77 @@ footer {
       padding-right: 10px;
     }
   }
+
+  .social-links {
+    margin-top: 30px;
+  }
+
+  .social-icon {
+    width: 35px;
+    height: 35px;
+    background: rgb(255, 255, 255);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    transition: all 0.3s ease;
+  }
+
+  .social-icon:hover {
+    background: white;
+    color: var(--primary);
+    transform: translateY(-3px);
+  }
+
+  .mobile-navigation {
+    z-index: 1030; /* Higher than most content but below modals */
+
+    .box{
+      box-shadow: 0px 0px 14px 2px lightgray;
+    }
+    .active {
+      font-weight: 600;
+      color: var(--primary);
+    }
+  }
+
+  /* .mobile-navigation {
+    position: fixed;
+    background: transparent;
+    bottom: 0;
+    width: 100%;
+    z-index: 1;
+    padding: 0px 10px;
+    padding-bottom: 4px;
+
+    .box {
+      display: flex;
+      width: 100%;
+      border-radius: 30px;
+      padding: 2px 20px;
+      background: white;
+      justify-content: space-between;
+      box-shadow: 0px 2px 12px 0px gray;
+    }
+
+    .active {
+      font-weight: 600;
+      color: var(--primary);
+    }
+  } */
+
+
+
 }
 
 .product {
   a:hover {
     color: unset;
+  }
+
+  .productloading{
+    height: 400px;
   }
 
   .card {
@@ -361,6 +453,9 @@ footer {
   }
 
   @media screen and (max-width: 768px) {
+    .productloading{
+      height: 230px;
+    }
     .produt-image {
       height: 160px;
     }
