@@ -76,7 +76,12 @@ function Home() {
 
     return (
         <>
-            <SEO title={'Home'} description={'Home of woody'} keywords={'woody, wood'} />
+            <SEO 
+                title="Welcome to Woody - Premium Wood Furniture & Decor"
+                description="Discover our exquisite collection of handcrafted wooden furniture, home decor, and accessories. Shop premium quality wood products at Woody - Your trusted destination for sustainable and elegant wooden furnishings."
+                keywords="wooden furniture, wood decor, handcrafted furniture, sustainable furniture, home decor, premium furniture, wooden accessories, Woody store"
+                image={homeDatas?.homeBanner?.[0]?.image}
+            />
             <div className="home ">
                 {homeDatas?.homeBanner?.length > 0 ?
 
